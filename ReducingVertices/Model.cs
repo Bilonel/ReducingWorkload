@@ -11,13 +11,14 @@ namespace ReducingVertices
 {
     internal class Model
     {
-        double optimumDistance = 0.02;
+        double slopeFactor = 0.02;
         public List<JoinedFaces> joinedFaceList = new List<JoinedFaces>();
         public List<Vertex> vertices = new List<Vertex>();
-        List<Face> faces = new List<Face>();
+        public List<Face> faces = new List<Face>();
 
-        public Model(string _data)
+        public Model(string _data,float slopeFactor_)
         {
+            slopeFactor = slopeFactor_;
             Face.staticIndex = 0;
             Vertex.staticIndex = 0;
             string[] lines = _data.Split("\n");
@@ -161,7 +162,7 @@ namespace ReducingVertices
             double area = Math.Sqrt(u * (u - a) * (u - b) * (u - c));
             double height = 2 * area / a ;
 
-            return height < optimumDistance;
+            return height < slopeFactor;
         }
         public void Run()
         {
